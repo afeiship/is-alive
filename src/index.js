@@ -2,7 +2,7 @@ import React from 'react';
 import { jsx } from 'slate-hyperscript';
 
 export default {
-  name: 'italic',
+  name: 'color',
   importer: (el, children) => {
     const nodeName = el.nodeName.toLowerCase();
     if (nodeName === 'span' && el.style.color) {
