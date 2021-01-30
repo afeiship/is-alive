@@ -1,5 +1,5 @@
 {
-  "name": "@scope/slate-plugin-color",
+  "name": "@jswork/slate-plugin-color",
   "version": "1.0.0",
   "description": "SlateJS color plugin.",
   "main": "dist/index.js",
