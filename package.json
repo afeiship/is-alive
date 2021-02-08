@@ -36,14 +36,5 @@
   "publishConfig": {
     "access": "public",
     "registry": "https://registry.npmjs.org/"
-  },
-  "dependencies": {
-    "@jswork/next": "^1.0.5",
-    "@jswork/next-registry-choices": "^1.0.1"
-  },
-  "keywords": [
-    "slate",
-    "plugin",
-    "color"
-  ]
+  }
 }

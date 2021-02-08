@@ -4,7 +4,10 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; /**
+                                                                                                                                                                                                                                                                   * @usage:
+                                                                                                                                                                                                                                                                   * Editor.addMark(editor,'color', '#f00')
+                                                                                                                                                                                                                                                                   */
 
 var _react = require('react');
 
@@ -12,41 +15,41 @@ var _react2 = _interopRequireDefault(_react);
 
 var _slateHyperscript = require('slate-hyperscript');
 
+var _nextSlatePlugin = require('@jswork/next-slate-plugin');
+
+var _nextSlatePlugin2 = _interopRequireDefault(_nextSlatePlugin);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-exports.default = {
-  name: 'color',
-  importer: function importer(el, children) {
-    var nodeName = el.nodeName.toLowerCase();
-    if (nodeName === 'span' && el.style.color) {
-      return (0, _slateHyperscript.jsx)('text', { value: el.style.color }, children);
+exports.default = _nextSlatePlugin2.default.define({
+  id: 'color',
+  serialize: {
+    input: function input(_ref, children) {
+      var el = _ref.el;
+
+      var nodeName = el.nodeName.toLowerCase();
+      if (nodeName === 'span' && el.style.color) {
+        return (0, _slateHyperscript.jsx)('text', { color: el.style.color }, children);
+      }
+    },
+    output: function output(_ref2) {
+      var el = _ref2.el,
+          color = _ref2.color;
+
+      el.style.color = color;
+      return el;
     }
   },
-  // to-html
-  exporter: function exporter(node, children) {
-    if (!children) {
-      if (node.color) {
-        var value = node.color.value;
+  render: function render(_, _ref3) {
+    var attributes = _ref3.attributes,
+        children = _ref3.children,
+        leaf = _ref3.leaf;
+    var color = leaf.color;
 
-        return '<span style="color: ' + value + ';">' + node.text + '</span>';
-      }
-    }
-  },
-  hooks: {
-    leaf: function leaf(inContext, _ref) {
-      var attributes = _ref.attributes,
-          children = _ref.children,
-          _leaf = _ref.leaf;
-
-      if (_leaf.color) {
-        var value = _leaf.color.value;
-
-        return _react2.default.createElement(
-          'span',
-          _extends({}, attributes, { style: { color: value } }),
-          children
-        );
-      }
-    }
+    return _react2.default.createElement(
+      'span',
+      _extends({ style: { color: color } }, attributes),
+      children
+    );
   }
-};
+});

@@ -1,33 +1,32 @@
+/**
+ * @usage:
+ * Editor.addMark(editor,'color', '#f00')
+ */
+
 import React from 'react';
 import { jsx } from 'slate-hyperscript';
+import NxSlatePlugin from '@jswork/next-slate-plugin';
 
-export default {
-  name: 'color',
-  importer: (el, children) => {
-    const nodeName = el.nodeName.toLowerCase();
-    if (nodeName === 'span' && el.style.color) {
-      return jsx('text', { value: el.style.color }, children);
+export default NxSlatePlugin.define({
+  id: 'color',
+  serialize: {
+    input: ({ el }, children) => {
+      const nodeName = el.nodeName.toLowerCase();
+      if (nodeName === 'span' && el.style.color) {
+        return jsx('text', { color: el.style.color }, children);
+      }
+    },
+    output: ({ el, color }) => {
+      el.style.color = color;
+      return el;
     }
   },
-  // to-html
-  exporter: (node, children) => {
-    if (!children) {
-      if (node.color) {
-        const { value } = node.color;
-        return `<span style="color: ${value};">${node.text}</span>`;
-      }
-    }
-  },
-  hooks: {
-    leaf: (inContext, { attributes, children, leaf }) => {
-      if (leaf.color) {
-        const { value } = leaf.color;
-        return (
-          <span {...attributes} style={{ color: value }}>
-            {children}
-          </span>
-        );
-      }
-    }
+  render: (_, { attributes, children, leaf }) => {
+    const { color } = leaf;
+    return (
+      <span style={{ color }} {...attributes}>
+        {children}
+      </span>
+    );
   }
-};
+});
