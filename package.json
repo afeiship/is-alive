@@ -1,6 +1,6 @@
 {
   "name": "@jswork/slate-plugin-color",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "SlateJS color plugin.",
   "main": "dist/index.js",
   "repository": "git@github.com:afeiship/slate-plugin-color.git",
@@ -36,5 +36,10 @@
   "publishConfig": {
     "access": "public",
     "registry": "https://registry.npmjs.org/"
-  }
+  },
+  "keywords": [
+    "slate",
+    "plugin",
+    "color"
+  ]
 }
