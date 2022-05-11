@@ -1,6 +1,6 @@
 {
   "name": "@jswork/is-alive",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Check url if is alive.",
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
@@ -40,5 +40,12 @@
     "registry": "https://registry.npmjs.org"
   },
   "boilerplate": "generator-typescript",
-  "homepage": "https://js.work"
+  "homepage": "https://js.work",
+  "keywords": [
+    "alive",
+    "head",
+    "http",
+    "https",
+    "url"
+  ]
 }
